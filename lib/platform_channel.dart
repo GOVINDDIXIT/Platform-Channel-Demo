@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
 class PlatformChannel extends StatefulWidget {
   @override
   _PlatformChannelState createState() => _PlatformChannelState();
@@ -14,10 +13,10 @@ class _PlatformChannelState extends State<PlatformChannel> {
   IconData iconSwitch = Icons.battery_unknown;
 
   static const MethodChannel methodChannel =
-  MethodChannel('dixit.govind.platformchanneldemo/methodChannel');
+      MethodChannel('dixit.govind.platformchanneldemo/methodChannel');
 
   static const EventChannel eventChannel =
-  EventChannel('dixit.govind.platformchanneldemo/chargingEventChannel');
+      EventChannel('dixit.govind.platformchanneldemo/chargingEventChannel');
 
   String _batteryLevel = 'Battery Level: unknown.';
   String _chargingStatus = 'Battery Status: unknown.';
@@ -44,7 +43,7 @@ class _PlatformChannelState extends State<PlatformChannel> {
   void _onEvent(Object event) {
     setState(() {
       _chargingStatus =
-      "Battery status: ${event == 'charging' ? '' : 'dis'}charging.";
+          "Battery status: ${event == 'charging' ? '' : 'dis'}charging.";
 
       iconSwitch = (event == 'charging')
           ? Icons.battery_charging_full
@@ -84,6 +83,7 @@ class _PlatformChannelState extends State<PlatformChannel> {
       ),
       home: Scaffold(
         appBar: AppBar(
+          backgroundColor: Color(0xFF801E48),
           title: Text(
             'Platform Channel App Demo',
             style: GoogleFonts.roboto(),

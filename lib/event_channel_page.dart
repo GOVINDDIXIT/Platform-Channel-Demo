@@ -34,6 +34,7 @@ class _EventChannelPageState extends State<EventChannelPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xFF801E48),
         title: Text('Event Channel'),
       ),
       body: Center(
