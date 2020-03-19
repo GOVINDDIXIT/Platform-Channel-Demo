@@ -14,6 +14,7 @@ class _MethodChannelPageState extends State<MethodChannelPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xFF801E48),
         title: Text("Method Channel"),
       ),
       body: Container(
@@ -33,46 +34,62 @@ class _MethodChannelPageState extends State<MethodChannelPage> {
 
   Builder osVersionButton() {
     return Builder(
-      builder: (context) => RaisedButton(
+      builder: (context) => OutlineButton(
+        child: Text('Get OS Version'),
         onPressed: () {
           _getOSVersion().then((value) {
             Scaffold.of(context).showSnackBar(
               SnackBar(
                 content: Text(value),
-                duration: Duration(seconds: 3),
+                duration: Duration(seconds: 2),
               ),
             );
           });
-        },
-        child: Text('OS Version'),
+        }, //callback when button is clicked
+        borderSide: BorderSide(
+          color: Color(0xFF801E48), //Color of the border
+          style: BorderStyle.solid, //Style of the border
+          width: 2.0, //width of the border
+        ),
       ),
     );
   }
 
   Builder checkCameraButton() {
     return Builder(
-      builder: (context) => RaisedButton(
+      builder: (context) => OutlineButton(
+        child: Text('Check Camera Hardware'),
         onPressed: () {
           _isCameraAvailable().then((value) {
             Scaffold.of(context).showSnackBar(
               SnackBar(
                 content: Text(value['status']),
-                duration: Duration(seconds: 3),
+                duration: Duration(seconds: 2),
               ),
             );
           });
-        },
-        child: Text('Check Camera Hardware'),
+        }, //callback when button is clicked
+        borderSide: BorderSide(
+          color: Color(0xFF801E48), //Color of the border
+          style: BorderStyle.solid, //Style of the border
+          width: 2.0, //width of the border
+        ),
       ),
     );
   }
 
-  RaisedButton callNumberButton() {
-    return RaisedButton(
+  OutlineButton callNumberButton() {
+    return OutlineButton(
+      child: Text('Call number 1234'),
       onPressed: () {
         _callNumber('1234');
       },
-      child: Text('Call number 1234'),
+      //callback when button is clicked
+      borderSide: BorderSide(
+        color: Color(0xFF801E48), //Color of the border
+        style: BorderStyle.solid, //Style of the border
+        width: 2.0, //width of the border
+      ),
     );
   }
 
@@ -83,7 +100,7 @@ class _MethodChannelPageState extends State<MethodChannelPage> {
     } on PlatformException catch (e) {
       version = e.message;
     }
-    return version;
+    return "Android " + version;
   }
 
   Future<Map<String, String>> _isCameraAvailable() async {

@@ -27,6 +27,8 @@ class MainActivity : FlutterActivity() {
         const val METHOD_CHANNEL: String = "dixit.govind.platformchanneldemo/methodChannel"
         const val ORIENTATION_EVENT_CHANNEL: String = "dixit.govind.platformchanneldemo/orientationEventChannel"
         const val CHARGING_EVENT_CHANNEL: String = "dixit.govind.platformchanneldemo/chargingEventChannel"
+        const val CHARGING_CHANNEL = "beingRD.flutter.io/charging";
+
         const val CALL_REQUEST_CODE = 101
     }
 
@@ -48,7 +50,7 @@ class MainActivity : FlutterActivity() {
             }
         }
 
-        EventChannel(flutterView, CHARGING_EVENT_CHANNEL).setStreamHandler(
+        EventChannel(flutterView, CHARGING_CHANNEL).setStreamHandler(
                 object : StreamHandler {
                     private var chargingStateChangeReceiver: BroadcastReceiver? = null
                     override fun onListen(arguments: Any, events: EventSink) {
@@ -64,18 +66,34 @@ class MainActivity : FlutterActivity() {
                 }
         )
 
-        EventChannel(flutterView, ORIENTATION_EVENT_CHANNEL).setStreamHandler(object : StreamHandler {
-            override fun onListen(
-                    arguments: Any?,
-                    events: EventSink?
-            ) {
-                emitDeviceOrientation(events)
-            }
-
-            override fun onCancel(arguments: Any?) {
-
-            }
-        })
+//        EventChannel(flutterView, CHARGING_EVENT_CHANNEL).setStreamHandler(
+//                object : StreamHandler {
+//                    private var chargingStateChangeReceiver: BroadcastReceiver? = null
+//                    override fun onListen(arguments: Any, events: EventSink) {
+//                        chargingStateChangeReceiver = createChargingStateChangeReceiver(events)
+//                        registerReceiver(
+//                                chargingStateChangeReceiver, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
+//                    }
+//
+//                    override fun onCancel(arguments: Any) {
+//                        unregisterReceiver(chargingStateChangeReceiver)
+//                        chargingStateChangeReceiver = null
+//                    }
+//                }
+//        )
+//
+//        EventChannel(flutterView, ORIENTATION_EVENT_CHANNEL).setStreamHandler(object : StreamHandler {
+//            override fun onListen(
+//                    arguments: Any?,
+//                    events: EventSink?
+//            ) {
+//                emitDeviceOrientation(events)
+//            }
+//
+//            override fun onCancel(arguments: Any?) {
+//
+//            }
+//        })
     }
 
     private fun getOSVersion(result: Result) {
