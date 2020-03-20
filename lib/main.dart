@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFF801E48),
-        title: Text('Platform Channels'),
+        title: Text('Platform Channels Sample App'),
       ),
       body: Center(
         child: Column(
@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
                 minWidth: 200.0,
                 height: 35,
                 color: Color(0xFF801E48),
-                child: new Text('Method Channel',
+                child: new Text('Method Channel Examples',
                     style: new TextStyle(fontSize: 16.0, color: Colors.white)),
                 onPressed: () {
                   final page = MethodChannelPage();
@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
             ),
-            SizedBox(height: 16),
+            SizedBox(height: 20),
             Material(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(22.0)),
@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                 minWidth: 200.0,
                 height: 35,
                 color: Color(0xFF801E48),
-                child: new Text('Event Channel',
+                child: new Text('Event Channel Examples',
                     style: new TextStyle(fontSize: 16.0, color: Colors.white)),
                 onPressed: () {
                   final page = EventChannelPage();
@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
             ),
-            SizedBox(height: 16),
+            SizedBox(height: 20),
             Material(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(22.0)),
@@ -84,7 +84,26 @@ class _HomePageState extends State<HomePage> {
                 minWidth: 200.0,
                 height: 35,
                 color: Color(0xFF801E48),
-                child: new Text('Combine Channels',
+                child: new Text('Handling Structured Data',
+                    style: new TextStyle(fontSize: 16.0, color: Colors.white)),
+                onPressed: () {
+                  final page = PlatformChannel();
+                  navigate(context, page);
+                },
+              ),
+            ),
+            SizedBox(height: 20),
+            Material(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(22.0)),
+              elevation: 10.0,
+              color: Color(0xFF801E48),
+              clipBehavior: Clip.antiAlias,
+              child: MaterialButton(
+                minWidth: 200.0,
+                height: 35,
+                color: Color(0xFF801E48),
+                child: new Text('Combine both Channels Example',
                     style: new TextStyle(fontSize: 16.0, color: Colors.white)),
                 onPressed: () {
                   final page = PlatformChannel();

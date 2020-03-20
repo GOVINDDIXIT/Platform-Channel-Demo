@@ -35,7 +35,7 @@ class _EventChannelPageState extends State<EventChannelPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFF801E48),
-        title: Text('Event Channel'),
+        title: Text('Event Channel Examples'),
       ),
       body: Center(
           child: Text(

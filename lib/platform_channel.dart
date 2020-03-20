@@ -84,10 +84,6 @@ class _PlatformChannelState extends State<PlatformChannel> {
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Color(0xFF801E48),
-          title: Text(
-            'Platform Channel App Demo',
-            style: GoogleFonts.roboto(),
-          ),
         ),
         body: Center(
           child: Column(

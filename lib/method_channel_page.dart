@@ -15,7 +15,7 @@ class _MethodChannelPageState extends State<MethodChannelPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFF801E48),
-        title: Text("Method Channel"),
+        title: Text("Method Channel Examples"),
       ),
       body: Container(
         padding: EdgeInsets.all(16.0),

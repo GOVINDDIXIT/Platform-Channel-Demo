@@ -13,7 +13,8 @@ import android.os.BatteryManager
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
 import android.os.Bundle
-import io.flutter.app.FlutterActivity
+import io.flutter.embedding.android.FlutterActivity
+import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.EventChannel.EventSink
 import io.flutter.plugin.common.EventChannel.StreamHandler
@@ -35,12 +36,13 @@ class MainActivity : FlutterActivity() {
     private lateinit var mSensorManager: SensorManager
     private lateinit var mAccelerometer: Sensor
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+
+    override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
+        super.configureFlutterEngine(flutterEngine)
         mSensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
 
-        MethodChannel(flutterView, METHOD_CHANNEL).setMethodCallHandler { methodCall, result ->
+        MethodChannel(flutterEngine.dartExecutor, METHOD_CHANNEL).setMethodCallHandler { methodCall, result ->
             when {
                 methodCall.method == "getOSVersion" -> getOSVersion(result)
                 methodCall.method == "isCameraAvailable" -> isCameraAvailable(result)
@@ -50,7 +52,7 @@ class MainActivity : FlutterActivity() {
             }
         }
 
-        EventChannel(flutterView, CHARGING_CHANNEL).setStreamHandler(
+        EventChannel(flutterEngine.dartExecutor, CHARGING_CHANNEL).setStreamHandler(
                 object : StreamHandler {
                     private var chargingStateChangeReceiver: BroadcastReceiver? = null
                     override fun onListen(arguments: Any, events: EventSink) {
@@ -66,34 +68,18 @@ class MainActivity : FlutterActivity() {
                 }
         )
 
-//        EventChannel(flutterView, CHARGING_EVENT_CHANNEL).setStreamHandler(
-//                object : StreamHandler {
-//                    private var chargingStateChangeReceiver: BroadcastReceiver? = null
-//                    override fun onListen(arguments: Any, events: EventSink) {
-//                        chargingStateChangeReceiver = createChargingStateChangeReceiver(events)
-//                        registerReceiver(
-//                                chargingStateChangeReceiver, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
-//                    }
-//
-//                    override fun onCancel(arguments: Any) {
-//                        unregisterReceiver(chargingStateChangeReceiver)
-//                        chargingStateChangeReceiver = null
-//                    }
-//                }
-//        )
-//
-//        EventChannel(flutterView, ORIENTATION_EVENT_CHANNEL).setStreamHandler(object : StreamHandler {
-//            override fun onListen(
-//                    arguments: Any?,
-//                    events: EventSink?
-//            ) {
-//                emitDeviceOrientation(events)
-//            }
-//
-//            override fun onCancel(arguments: Any?) {
-//
-//            }
-//        })
+        EventChannel(flutterEngine.dartExecutor, ORIENTATION_EVENT_CHANNEL).setStreamHandler(object : StreamHandler {
+            override fun onListen(
+                    arguments: Any?,
+                    events: EventSink?
+            ) {
+                emitDeviceOrientation(events)
+            }
+
+            override fun onCancel(arguments: Any?) {
+
+            }
+        })
     }
 
     private fun getOSVersion(result: Result) {
